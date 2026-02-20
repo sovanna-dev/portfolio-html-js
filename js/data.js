@@ -30,6 +30,6 @@ const projects = [
     desc: "Built with HTML, CSS & JavaScript. Clean UI with full math operations.",
     tags: ["HTML", "CSS", "JS"],
     link: "https://vanna-gio.github.io/SimpleCalculator.github.io/",
-    image: "assets/images/calculator.png"
+    image: "assets/images/Calculator.png"
   },
 ];
