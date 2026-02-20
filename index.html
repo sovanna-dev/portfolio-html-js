@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- SEO Tags -->
+  <meta name="description" content="Sovanna Ra - Web Developer Intern Portfolio">
+  <meta name="keywords" content="Sovanna Ra, Web Developer, Cambodia, Portfolio">
+
+  <title>Sovanna Ra | Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <div id="header">
+    <div class="container">
+      <nav>
+        <a href="#header" class="logo">Sovanna<span>Ra</span></a>
+        <ul id="sidemenu">
+          <li><a href="#header">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+        </ul>
+        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero" class="container">
+    <div class="header-text">
+      <p>Applying for <span>Web Developer Internship</span></p>
+      <h1>Hi, I'm <span>Sovanna Ra</span></h1>
+      <h2>Frontend Developer | Business IT Student</h2>
+      <a href="#portfolio" class="btn">View My Work</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <div id="about">
+    <div class="container">
+      <div class="row">
+        <div class="about-col-1">
+          <img src="assets/images/profile.jpg" alt="Sovanna Ra">
+        </div>
+        <div class="about-col-2">
+          <h1 class="sub-title">About Me</h1>
+          <p>Aspiring web developer with a solid foundation in front-end and back-end technologies. 
+             Passionate about building user-friendly and visually appealing websites.</p>
+
+          <!-- TABS -->
+          <div class="tab-title">
+            <p class="tab-links active-link" onclick="opentab(event, 'skills')">Skills</p>
+            <p class="tab-links" onclick="opentab(event, 'experience')">Experience</p>
+            <p class="tab-links" onclick="opentab(event, 'education')">Education</p>
+          </div>
+
+          <div class="tab-contents active-tab" id="skills">
+            <ul>
+              <li><span>Frontend</span><br>HTML, CSS, JavaScript, Bootstrap, jQuery</li>
+              <li><span>UI/UX</span><br>Figma, Adobe Photoshop</li>
+              <li><span>Database</span><br>MySQL, SQL Server</li>
+              <li><span>Tools</span><br>Git, GitHub, VS Code</li>
+            </ul>
+          </div>
+          <div class="tab-contents" id="experience">
+            <ul>
+              <li><span>2023 - Current</span><br>Data Entry Specialist</li>
+              <li><span>Software Developer Intern</span><br>ACLIDA University — 10 months<br>HTML, CSS, JS, C#, ASP.NET MVC, SQL</li>
+            </ul>
+          </div>
+          <div class="tab-contents" id="education">
+            <ul>
+              <li><span>2022 - Current</span><br>ACLIDA University of Business</li>
+              <li>Third-year <strong>Business IT</strong> student</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SERVICES SECTION ===== -->
+  <div id="services">
+    <div class="container">
+      <h1 class="sub-title">Services</h1>
+      <div class="services-list">
+        <div>
+          <i class="fa-solid fa-code"></i>
+          <h2>Web Design</h2>
+          <p>Designing clean, responsive web interfaces for your business.</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-pen-ruler"></i>
+          <h2>UX/UI Design</h2>
+          <p>Creating user-friendly, visually appealing interfaces.</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-mobile-screen"></i>
+          <h2>App Design</h2>
+          <p>Designing modern mobile application interfaces.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PORTFOLIO SECTION ===== -->
+  <div id="portfolio">
+    <div class="container">
+      <h1 class="sub-title">My Projects</h1>
+      <!-- JS will inject project cards here -->
+      <div id="project-list" class="work-list"></div>
+      <a href="https://github.com/Vanna-Gio" class="btn" target="_blank">See More on GitHub</a>
+    </div>
+  </div>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <div id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p><i class="fa-solid fa-envelope"></i> rasovanna785@gmail.com</p>
+          <p><i class="fa-solid fa-phone"></i> +855 2901277</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/18oMJ2kkFu/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/Vanna-Gio" target="_blank"><i class="fa-brands fa-github"></i></a>
+          </div>
+          <a href="assets/my-cv.pdf" download class="btn">Download CV</a>
+        </div>
+        <div class="contact-right">
+          <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="6" placeholder="Your Message"></textarea>
+            <button type="submit" class="btn">Send Message</button>
+            <span id="form-msg"></span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright &copy; 2025 Sovanna Ra. Made with <i class="fa-solid fa-heart"></i></p>
+    </div>
+  </div>
+
+  <!-- Scripts MUST be at bottom -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
