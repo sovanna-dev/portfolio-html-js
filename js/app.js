@@ -1,27 +1,46 @@
 // js/app.js
-// This is your CONTROLLER — connects data to UI
+// CONTROLLER — connects data to UI
 
-// ========== AUTO-LOAD PROJECTS ==========
+// ============================================
+// PROJECT CARDS
+// ============================================
+
+const typeBadge = {
+  android: { icon: "fa-brands fa-android", label: "Android", color: "#3ddc84" },
+  web:     { icon: "fa-solid fa-globe",    label: "Web",     color: "#3a71ff" },
+  design:  { icon: "fa-solid fa-pen-ruler", label: "Design", color: "#ff6b6b" }
+};
+
 function loadProjects() {
   const container = document.getElementById("project-list");
+  container.innerHTML = "";
 
   projects.forEach(project => {
     const card = document.createElement("div");
     card.className = "work";
 
-    // Build tags HTML
+    // Tags
     const tagsHTML = project.tags
-      .map(tag => `<span style="background:rgba(58,113,255,0.2);color:#3a71ff;padding:2px 8px;border-radius:4px;font-size:0.75rem;">${tag}</span>`)
-      .join(" ");
+      .map(tag => `<span class="tag">${tag}</span>`)
+      .join("");
+
+    // Type badge (Android / Web)
+    const badge = typeBadge[project.type] || typeBadge["web"];
+    const badgeHTML = `
+      <span class="type-badge" style="color:${badge.color}; border-color:${badge.color}50;">
+        <i class="${badge.icon}"></i> ${badge.label}
+      </span>`;
 
     card.innerHTML = `
-      <img src="${project.image}" 
-           alt="${project.title}"
-           onerror="this.src='${encodeURIComponent(project.title)}'">
+      <img
+        src="${project.image}"
+        alt="${project.title}"
+        onerror="this.src='https://via.placeholder.com/400x250/06152c/3a71ff?text=${encodeURIComponent(project.title)}'">
       <div class="layer">
+        <div class="layer-top">${badgeHTML}</div>
         <h3>${project.title}</h3>
         <p>${project.desc}</p>
-        <div style="margin-bottom:12px">${tagsHTML}</div>
+        <div class="tags-row">${tagsHTML}</div>
         <a href="${project.link}" target="_blank" title="View Project">
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
@@ -32,22 +51,23 @@ function loadProjects() {
   });
 }
 
-// ========== TAB SYSTEM ==========
+// ============================================
+// TAB SYSTEM
+// ============================================
 function opentab(event, tabName) {
-  // Remove active from ALL tabs
   document.querySelectorAll(".tab-links").forEach(link => {
     link.classList.remove("active-link");
   });
   document.querySelectorAll(".tab-contents").forEach(content => {
     content.classList.remove("active-tab");
   });
-
-  // Activate clicked tab
   event.currentTarget.classList.add("active-link");
   document.getElementById(tabName).classList.add("active-tab");
 }
 
-// ========== MOBILE MENU ==========
+// ============================================
+// MOBILE MENU
+// ============================================
 function openmenu() {
   document.getElementById("sidemenu").classList.add("open");
 }
@@ -55,97 +75,95 @@ function closemenu() {
   document.getElementById("sidemenu").classList.remove("open");
 }
 
-// Close menu when a link is clicked
+// Close menu when any nav link clicked
 document.querySelectorAll("#sidemenu a").forEach(link => {
   link.addEventListener("click", closemenu);
 });
 
-// ========== CONTACT FORM ==========
+// ============================================
+// CONTACT FORM
+// ============================================
 document.getElementById("contact-form").addEventListener("submit", function(e) {
-  e.preventDefault(); // Stop page reload
+  e.preventDefault();
 
   const name    = document.getElementById("name").value.trim();
   const email   = document.getElementById("email").value.trim();
   const message = document.getElementById("message").value.trim();
   const msg     = document.getElementById("form-msg");
 
-  // Basic validation
   if (!name || !email || !message) {
     msg.style.color = "#e74c3c";
     msg.textContent = "❌ Please fill in all fields.";
     return;
   }
 
-  // Success (in real project you'd send to a backend)
   msg.style.color = "#4CAF50";
   msg.textContent = `✅ Thanks ${name}! Message received. I'll reply soon.`;
   this.reset();
 
-  // Clear message after 4 seconds
   setTimeout(() => { msg.textContent = ""; }, 4000);
 });
 
-// ========== STICKY NAV SHADOW ==========
+// ============================================
+// STICKY NAV SHADOW ON SCROLL
+// ============================================
 window.addEventListener("scroll", function() {
   const nav = document.getElementById("header");
   if (window.scrollY > 50) {
-    nav.style.boxShadow = "0 4px 30px rgba(0,0,0,0.4)";
+    nav.style.boxShadow = "0 4px 30px rgba(0,0,0,0.5)";
   } else {
     nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.3)";
   }
 });
 
-// ========== INIT ==========
-// Run when page loads
-loadProjects();
-
-
-// ===========================
+// ============================================
 // IMAGE SLIDER
-// ===========================
+// ============================================
 (function () {
   const slides = document.querySelectorAll(".slide");
   const dots   = document.querySelectorAll(".dot");
   let current  = 0;
   let timer;
 
+  // Guard: stop if no slider found on page
+  if (!slides.length || !dots.length) return;
+
   function goToSlide(index) {
-    // Remove active from current
     slides[current].classList.remove("active");
     dots[current].classList.remove("active");
-
-    // Set new current
     current = index;
-
-    // Add active to new slide
     slides[current].classList.add("active");
     dots[current].classList.add("active");
   }
 
   function nextSlide() {
-    const next = (current + 1) % slides.length; // Loop back to 0
+    const next = (current + 1) % slides.length;
     goToSlide(next);
   }
 
   function startAuto() {
-    timer = setInterval(nextSlide, 2000); // Every 2 second
+    timer = setInterval(nextSlide, 2000);
   }
 
   function stopAuto() {
     clearInterval(timer);
   }
 
-  // Pause on hover — good UX!
+  // Pause on hover
   document.querySelector(".img-slider").addEventListener("mouseenter", stopAuto);
   document.querySelector(".img-slider").addEventListener("mouseleave", startAuto);
-  
-  // Make goToSlide global so dots onclick works
+
+  // Global — for onclick in HTML dots
   window.goToSlide = function(index) {
-    stopAuto();       // Reset timer when user clicks
+    stopAuto();
     goToSlide(index);
     startAuto();
   };
 
-  // Start automatically
   startAuto();
 })();
+
+// ============================================
+// INIT — Run on page load
+// ============================================
+loadProjects();

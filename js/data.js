@@ -3,6 +3,15 @@
 // To add a new project, just add to this array!
 
 const projects = [
+
+   {
+    title: "SmartShop 🛒",
+    desc: "Android e-commerce app built with Kotlin, MVVM architecture, Firebase backend, and Material Design 3.",
+    tags: ["Kotlin", "MVVM", "Firebase", "Material Design 3", "Android"],
+    link: "https://github.com/sovanna-dev/SmartShop",
+    image: "assets/images/smartshop.png",
+    type: "android"                       
+  },
  
   {
     title: "Fashion Sale Website",
