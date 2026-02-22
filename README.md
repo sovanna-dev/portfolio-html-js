@@ -9,7 +9,7 @@
 
 ## 🔗 Live Demo
 
-👉 [View Portfolio](https://Vanna-Gio.github.io/portfolio-html-js/)
+👉 [View Portfolio](https://sovanna-dev.github.io/portfolio-html-js/)
 
 ---
 
